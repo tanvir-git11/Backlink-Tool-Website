@@ -7,7 +7,7 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: #121212;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
       color: white;
     }
 
@@ -16,69 +16,109 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #1f1f1f;
-      padding: 10px 20px;
+      background: rgba(31, 31, 31, 0.7);
+      padding: 15px 30px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 999;
     }
 
     .navbar .logo {
       color: #00ffff;
       font-weight: bold;
       text-decoration: none;
-      font-size: 20px;
+      font-size: 22px;
+      transition: 0.3s;
+    }
+
+    .navbar .logo:hover {
+      color: #0ff;
+      text-shadow: 0 0 8px #0ff;
     }
 
     .navbar .menu a {
-      margin-left: 20px;
-      color: white;
+      margin-left: 25px;
+      color: #e2e8f0;
       text-decoration: none;
+      font-size: 16px;
       transition: 0.3s;
-      
     }
 
     .navbar .menu a:hover {
       color: #00ffff;
+      text-shadow: 0 0 6px #00ffff;
     }
 
     .container {
-      padding: 20px;
+      max-width: 700px;
+      margin: 40px auto;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      border-radius: 20px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+    }
+
+    h2 {
+      color: #00ffff;
+      margin-bottom: 20px;
+      text-align: center;
     }
 
     textarea {
       width: 100%;
       height: 200px;
-      background: #1c1c1c;
+      background: #1e293b;
       color: white;
       border: none;
-      border-radius: 10px;
-      padding: 10px;
-      margin-bottom: 10px;
+      border-radius: 12px;
+      padding: 15px;
+      font-size: 15px;
+      resize: vertical;
     }
 
     button {
-      padding: 10px 20px;
+      padding: 12px 20px;
       border: none;
       border-radius: 10px;
       background: #00ffff;
       color: #000;
       font-weight: bold;
       cursor: pointer;
-      margin-right: 10px;
+      margin: 10px 10px 0 0;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #00cccc;
     }
 
     #output {
       white-space: pre-wrap;
       background: #1a1a1a;
-      padding: 10px;
-      margin-top: 10px;
-      border-radius: 10px;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 12px;
+      font-family: monospace;
     }
-    button:last-of-type {
-  background: #00ffff;
-  color: black;
-  float: right;
-  margin-top: 5px;
-}
 
+    @media (max-width: 600px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .menu {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+      }
+      .menu a {
+        margin: 8px 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -102,13 +142,10 @@
     
     <button onclick="removeSpaces()">Remove Link Spaces</button>
     <button onclick="removeBlankLines()">Remove Blank Lines</button>
+    <button onclick="copyOutput()">📋 Copy</button>
 
     <div id="output"></div>
-    <button onclick="copyOutput()">📋 Copy</button>
   </div>
-
-
-
 
 <script>
   // 🔹 Link-এর স্পেস রিমুভ

@@ -2,103 +2,149 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Link Converter</title>
+  <title>HTML & BBCode Link Generator</title>
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: #121212;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
       color: white;
-      padding: 20px;
     }
-      /* Navbar */
-      .navbar {
+
+    .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #1f1f1f;
-      padding: 10px 20px;
+      background: rgba(31, 31, 31, 0.7);
+      padding: 15px 30px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 999;
     }
 
     .navbar .logo {
       color: #00ffff;
       font-weight: bold;
       text-decoration: none;
-      font-size: 20px;
+      font-size: 22px;
+      transition: 0.3s;
+    }
+
+    .navbar .logo:hover {
+      color: #0ff;
+      text-shadow: 0 0 8px #0ff;
     }
 
     .navbar .menu a {
-      margin-left: 20px;
-      color: white;
+      margin-left: 25px;
+      color: #e2e8f0;
       text-decoration: none;
+      font-size: 16px;
       transition: 0.3s;
-      
     }
 
     .navbar .menu a:hover {
       color: #00ffff;
+      text-shadow: 0 0 6px #00ffff;
     }
-    
+
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      border-radius: 20px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+    }
+
     h2 {
       color: #00ffff;
+      margin-bottom: 20px;
+      text-align: center;
     }
 
     textarea {
       width: 100%;
-      height: 150px;
-      background: #1c1c1c;
+      height: 200px;
+      background: #1e293b;
       color: white;
       border: none;
-      border-radius: 10px;
-      padding: 10px;
-      margin-bottom: 10px;
+      border-radius: 12px;
+      padding: 15px;
+      font-size: 15px;
+      resize: vertical;
     }
 
     button {
-      padding: 10px 20px;
-      background: #00ffff;
+      padding: 12px 20px;
       border: none;
       border-radius: 10px;
+      background: #00ffff;
       color: #000;
       font-weight: bold;
       cursor: pointer;
-      margin: 5px 10px 10px 0;
+      margin: 10px 10px 0 0;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #00cccc;
     }
 
     #output {
-      background: #1a1a1a;
-      padding: 10px;
-      border-radius: 10px;
       white-space: pre-wrap;
-      margin-top: 10px;
+      background: #1a1a1a;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 12px;
+      font-family: monospace;
+    }
+
+    @media (max-width: 600px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .menu {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+      }
+      .menu a {
+        margin: 8px 0;
+      }
     }
   </style>
 </head>
 <body>
-    <!-- 🔷 Navbar -->
-    <div class="navbar">
-      <a href="https://facebook.com/yourprofile" class="logo" target="_blank">⚙️ DevTools</a>
-      <div class="menu">
-        <a href="/index.html">Remove Spaces</a>
-        <a href="/link_to_html.html">Link Converter</a>
-        <a href="/Image_Resize.html">Image Resize</a>
-        <a href="#">More Tools</a>
-      </div>
+
+  <div class="navbar">
+    <a href="https://wa.me/message/2WHTXTRKJEIIM1?src=qr" class="logo" target="_blank">⚙️ DevTools</a>
+    <div class="menu">
+      <a href="/index.html">Remove Spaces</a>
+      <a href="/link_to_html.html">Link Converter</a>
+      <a href="/Image_Resize.html">Image Resize</a>
+      <a href="#">More Tools</a>
     </div>
-  
+  </div>
 
-  <h2>🔗 HTML & BBCode Link Generator</h2>
+  <div class="container">
+    <h2>🔗 HTML & BBCode Link Generator</h2>
 
-  <textarea id="inputLinks" placeholder="এক বা একাধিক লিংক এখানে দিন..."></textarea>
+    <textarea id="inputLinks" placeholder="এক বা একাধিক লিংক এখানে দিন..."></textarea>
 
-  <button onclick="convertToHTML()">🌐 HTML এ কনভার্ট</button>
-  <button onclick="convertToBB()">💬 BB Code কনভার্ট</button>
-  <button onclick="copyOutput()">📋 Copy</button>
+    <button onclick="convertToHTML()">🌐 HTML এ কনভার্ট</button>
+    <button onclick="convertToBB()">💬 BB Code কনভার্ট</button>
+    <button onclick="copyOutput()">📋 Copy</button>
 
-  <div id="output"></div>
+    <div id="output"></div>
+  </div>
 
   <script>
-    // 🔹 HTML এ কনভার্ট
     function convertToHTML() {
       const input = document.getElementById("inputLinks").value;
       const links = input.split('\n');
@@ -108,7 +154,6 @@
       document.getElementById("output").innerText = converted.join('\n');
     }
 
-    // 🔹 BBCode এ কনভার্ট
     function convertToBB() {
       const input = document.getElementById("inputLinks").value;
       const links = input.split('\n');
@@ -118,7 +163,6 @@
       document.getElementById("output").innerText = converted.join('\n');
     }
 
-    // 🔹 Copy Button
     function copyOutput() {
       const text = document.getElementById("output").innerText;
       if (!text) return alert("❌ কপি করার কিছু নেই!");
