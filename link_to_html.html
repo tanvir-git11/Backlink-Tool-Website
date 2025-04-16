@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Link Converter</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #121212;
+      color: white;
+      padding: 20px;
+    }
+
+    h2 {
+      color: #00ffff;
+    }
+
+    textarea {
+      width: 100%;
+      height: 150px;
+      background: #1c1c1c;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #00ffff;
+      border: none;
+      border-radius: 10px;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 5px 10px 10px 0;
+    }
+
+    #output {
+      background: #1a1a1a;
+      padding: 10px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🔗 HTML & BBCode Link Generator</h2>
+
+  <textarea id="inputLinks" placeholder="এক বা একাধিক লিংক এখানে দিন..."></textarea>
+
+  <button onclick="convertToHTML()">🌐 HTML এ কনভার্ট</button>
+  <button onclick="convertToBB()">💬 BB Code কনভার্ট</button>
+  <button onclick="copyOutput()">📋 Copy</button>
+
+  <div id="output"></div>
+
+  <script>
+    // 🔹 HTML এ কনভার্ট
+    function convertToHTML() {
+      const input = document.getElementById("inputLinks").value;
+      const links = input.split('\n');
+      const converted = links
+        .filter(link => link.trim() !== '')
+        .map(link => `<a href="${link.trim()}" target="_blank">${link.trim()}</a>`);
+      document.getElementById("output").innerText = converted.join('\n');
+    }
+
+    // 🔹 BBCode এ কনভার্ট
+    function convertToBB() {
+      const input = document.getElementById("inputLinks").value;
+      const links = input.split('\n');
+      const converted = links
+        .filter(link => link.trim() !== '')
+        .map(link => `[url=${link.trim()}]${link.trim()}[/url]`);
+      document.getElementById("output").innerText = converted.join('\n');
+    }
+
+    // 🔹 Copy Button
+    function copyOutput() {
+      const text = document.getElementById("output").innerText;
+      if (!text) return alert("❌ কপি করার কিছু নেই!");
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = event.target;
+        btn.innerText = "✅ Copied!";
+        setTimeout(() => btn.innerText = "📋 Copy", 1500);
+      });
+    }
+  </script>
+
+</body>
+</html>

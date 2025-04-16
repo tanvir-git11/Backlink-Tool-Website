@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Multi Tool Website</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #121212;
+      color: white;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1f1f1f;
+      padding: 10px 20px;
+    }
+
+    .navbar .logo {
+      color: #00ffff;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 20px;
+    }
+
+    .navbar .menu a {
+      margin-left: 20px;
+      color: white;
+      text-decoration: none;
+      transition: 0.3s;
+      
+    }
+
+    .navbar .menu a:hover {
+      color: #00ffff;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 200px;
+      background: #1c1c1c;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      background: #00ffff;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    #output {
+      white-space: pre-wrap;
+      background: #1a1a1a;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 10px;
+    }
+    button:last-of-type {
+  background: #00ffff;
+  color: black;
+  float: right;
+  margin-top: 5px;
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- 🔷 Navbar -->
+  <div class="navbar">
+    <a href="https://facebook.com/yourprofile" class="logo" target="_blank">⚙️ DevTools</a>
+    <div class="menu">
+      <a href="/index.html">Remove Spaces</a>
+      <a href="/link_to_html.html">Link Converter</a>
+      <a href="#">More Tools</a>
+    </div>
+  </div>
+
+  <!-- 🔧 Tools -->
+  <div class="container">
+    <h2>🔗 Remove Line Spaces & Link Spaces</h2>
+
+    <textarea id="inputArea" placeholder="Paste your links here..."></textarea>
+    
+    <button onclick="removeSpaces()">Remove Link Spaces</button>
+    <button onclick="removeBlankLines()">Remove Blank Lines</button>
+
+    <div id="output"></div>
+    <button onclick="copyOutput()">📋 Copy</button>
+  </div>
+
+
+
+
+<script>
+  // 🔹 Link-এর স্পেস রিমুভ
+  function removeSpaces() {
+    const input = document.getElementById("inputArea").value;
+    const lines = input.split('\n');
+    const cleaned = lines.map(link => link.replace(/\s+/g, ''));
+    document.getElementById("output").innerText = cleaned.join('\n');
+  }
+
+  // 🔹 ফাঁকা লাইন রিমুভ
+  function removeBlankLines() {
+    const input = document.getElementById("inputArea").value;
+    const lines = input.split('\n');
+    const cleaned = lines.filter(line => line.trim() !== '');
+    document.getElementById("output").innerText = cleaned.join('\n');
+  }
+
+  // 🔹 কপি ফাংশন
+  function copyOutput() {
+    const text = document.getElementById("output").innerText;
+    if (!text) return alert("❌ Output খালি!");
+
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = event.target;
+      btn.innerText = "✅ Copied!";
+      setTimeout(() => btn.innerText = "📋 Copy", 1500);
+    });
+  }
+</script>
+
+</body>
+</html>
