@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Image Resizer</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 40px;
+      color: #fff;
+    }
+    .navbar {
+    background-color: #0f172a;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Segoe UI', sans-serif;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+  }
+  .navbar .logo {
+    font-size: 20px;
+    text-decoration: none;
+    color: #00ffff;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  .navbar .logo:hover {
+    color: #0ff;
+    text-shadow: 0 0 5px #0ff;
+  }
+  .menu a {
+    margin-left: 25px;
+    text-decoration: none;
+    color: #cbd5e1;
+    font-size: 16px;
+    transition: 0.3s;
+  }
+  .menu a:hover {
+    color: #00ffff;
+    text-shadow: 0 0 6px #0ff;
+  }
+
+  /* Responsive for small devices */
+  @media (max-width: 600px) {
+    .navbar {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .menu {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    .menu a {
+      margin: 8px 0;
+    }
+  }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      border-radius: 20px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 26px;
+      color: #00ffff;
+    }
+    input[type="file"],
+    input[type="number"],
+    button {
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px 15px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+    }
+    input[type="file"],
+    input[type="number"] {
+      background: #1e2d3b;
+      color: #fff;
+    }
+    button {
+      background: #00ffff;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #00cccc;
+    }
+    canvas {
+      display: block;
+      margin: 20px auto 0;
+      border: 2px dashed #00ffff;
+      border-radius: 10px;
+      max-width: 100%;
+    }
+  </style>
+</head>
+<body>
+     <!-- 🔷 Navbar -->
+  <div class="navbar">
+    <a href="https://facebook.com/yourprofile" class="logo" target="_blank">⚙️ DevTools</a>
+    <div class="menu">
+      <a href="/index.html">Remove Spaces</a>
+      <a href="/link_to_html.html">Link Converter</a>
+      <a href="/Image_Resize.html">Image Resize</a>
+      <a href="#">More Tools</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2>🖼️ Smart Image Resizer</h2>
+
+    <input type="file" id="upload" accept="image/*">
+    <input type="number" id="width" placeholder="Enter Width (px)">
+    <input type="number" id="height" placeholder="Enter Height (px)">
+
+    <button onclick="resizeImage()">📐 Resize Image</button>
+    <button onclick="downloadImage()">⬇️ Download Resized Image</button>
+
+    <canvas id="canvas"></canvas>
+  </div>
+
+  <script>
+    let img = new Image();
+
+    document.getElementById('upload').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        img.src = event.target.result;
+      }
+      reader.readAsDataURL(file);
+    });
+
+    function resizeImage() {
+      const width = parseInt(document.getElementById('width').value);
+      const height = parseInt(document.getElementById('height').value);
+      const canvas = document.getElementById('canvas');
+      const ctx = canvas.getContext('2d');
+
+      if (!width || !height) {
+        alert("Please enter both width and height!");
+        return;
+      }
+
+      canvas.width = width;
+      canvas.height = height;
+
+      ctx.drawImage(img, 0, 0, width, height);
+    }
+
+    function downloadImage() {
+      const canvas = document.getElementById('canvas');
+      const link = document.createElement('a');
+      link.download = 'resized-image.png';
+      link.href = canvas.toDataURL();
+      link.click();
+    }
+  </script>
+
+</body>
+</html>

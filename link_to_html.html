@@ -11,7 +11,34 @@
       color: white;
       padding: 20px;
     }
+      /* Navbar */
+      .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1f1f1f;
+      padding: 10px 20px;
+    }
 
+    .navbar .logo {
+      color: #00ffff;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 20px;
+    }
+
+    .navbar .menu a {
+      margin-left: 20px;
+      color: white;
+      text-decoration: none;
+      transition: 0.3s;
+      
+    }
+
+    .navbar .menu a:hover {
+      color: #00ffff;
+    }
+    
     h2 {
       color: #00ffff;
     }
@@ -48,6 +75,17 @@
   </style>
 </head>
 <body>
+    <!-- 🔷 Navbar -->
+    <div class="navbar">
+      <a href="https://facebook.com/yourprofile" class="logo" target="_blank">⚙️ DevTools</a>
+      <div class="menu">
+        <a href="/index.html">Remove Spaces</a>
+        <a href="/link_to_html.html">Link Converter</a>
+        <a href="/Image_Resize.html">Image Resize</a>
+        <a href="#">More Tools</a>
+      </div>
+    </div>
+  
 
   <h2>🔗 HTML & BBCode Link Generator</h2>
 
